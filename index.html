@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLAYVERSE | Central de Jogos</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --bg: #100d20;
+    --card: #1d1833;
+    --purple: #9b6dff;
+    --pink: #ff6eb4;
+    --blue: #5cc8ff;
+    --text: #ffffff;
+    --muted: #aaa4c4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    padding: 22px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ffffff12;
+    background: #100d20;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--pink);
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 700;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--pink);
+}
+
+.hero {
+    padding: 75px 7% 50px;
+    text-align: center;
+    background: radial-gradient(ellipse at top, #56328b55, transparent 65%);
+}
+
+.hero .tag {
+    display: inline-block;
+    background: #9b6dff22;
+    color: #c6aaff;
+    border: 1px solid #9b6dff55;
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 7vw, 72px);
+    line-height: 1.1;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg, #a77bff, #ff75bb);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.button {
+    display: inline-block;
+    background: linear-gradient(90deg, #8c5cff, #d35bce);
+    border: none;
+    color: white;
+    border-radius: 13px;
+    padding: 15px 30px;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px #9b6dff55;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+    margin-top: 45px;
+    flex-wrap: wrap;
+}
+
+.stat strong {
+    display: block;
+    font-size: 25px;
+    color: var(--pink);
+}
+
+.stat small {
+    color: var(--muted);
+}
+
+main {
+    padding: 40px 7% 80px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.game-card {
+    background: var(--card);
+    border: 1px solid #ffffff10;
+    border-radius: 20px;
+    padding: 25px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--purple);
+    box-shadow: 0 15px 35px #00000033;
+}
+
+.game-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 17px;
+    display: grid;
+    place-items: center;
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.purple { background: #9b6dff25; }
+.pink { background: #ff6eb425; }
+.blue { background: #5cc8ff25; }
+.orange { background: #ffad5c25; }
+.green { background: #5cffa425; }
+
+.game-card h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.game-card p {
+    color: var(--muted);
+    font-size: 14px;
+    min-height: 42px;
+    margin-bottom: 20px;
+}
+
+.play {
+    color: var(--pink);
+    font-weight: 900;
+}
+
+#gameArea {
+    display: none;
+    margin-top: 45px;
+    background: var(--card);
+    border: 1px solid #ffffff15;
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    min-height: 280px;
+}
+
+#gameArea h2 {
+    font-size: 27px;
+    margin-bottom: 15px;
+}
+
+#gameArea p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.game-content {
+    max-width: 550px;
+    margin: auto;
+}
+
+.game-content button {
+    background: linear-gradient(90deg, #8c5cff, #d35bce);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 800;
+    margin: 5px;
+    font-size: 15px;
+}
+
+.game-content button:hover {
+    opacity: .85;
+}
+
+.game-content input {
+    background: #100d20;
+    border: 1px solid #9b6dff;
+    color: white;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 16px;
+    width: 150px;
+    text-align: center;
+    margin: 10px;
+}
+
+#feedback {
+    margin-top: 20px;
+    font-weight: 800;
+    color: var(--pink);
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 65px);
+    justify-content: center;
+    gap: 10px;
+    margin: 25px auto;
+}
+
+.memory-card {
+    width: 65px;
+    height: 65px;
+    background: #342858;
+    border-radius: 12px;
+    font-size: 27px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border: 1px solid #ffffff15;
+}
+
+.memory-card:hover {
+    background: #493576;
+}
+
+#target {
+    display: none;
+    margin: 25px auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--pink);
+    cursor: pointer;
+    box-shadow: 0 0 30px #ff6eb477;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+    border-top: 1px solid #ffffff12;
+}
+
+footer span {
+    color: var(--pink);
+}
+
+@media(max-width:600px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    nav a {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .hero {
+        padding: 60px 5% 35px;
+    }
+
+    main {
+        padding: 35px 5% 60px;
+    }
+
+    .stats {
+        gap: 25px;
+    }
+
+    #gameArea {
+        padding: 20px 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">PLAY<span>VERSE</span> 🎮</div>
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#jogos">Jogos</a>
+    </nav>
+</header>
+
+<section class="hero" id="inicio">
+    <div class="tag">✦ SEU UNIVERSO DE DIVERSÃO ✦</div>
+
+    <h1>O jogo começa <span>aqui.</span></h1>
+
+    <p>Desafie sua mente, teste suas habilidades e divirta-se!</p>
+
+    <a href="#jogos" class="button">EXPLORAR JOGOS →</a>
+
+    <div class="stats">
+        <div class="stat">
+            <strong>05</strong>
+            <small>Jogos disponíveis</small>
+        </div>
+
+        <div class="stat">
+            <strong>∞</strong>
+            <small>Diversão</small>
+        </div>
+
+        <div class="stat">
+            <strong>100%</strong>
+            <small>Gratuito</small>
+        </div>
+    </div>
+</section>
+
+<main>
+    <section id="jogos">
+        <h2 class="section-title">Explore os jogos ✨</h2>
+        <p class="section-subtitle">Escolha seu desafio e comece a jogar.</p>
+
+        <div class="games">
+
+            <div class="game-card" onclick="openGame('memory')">
+                <div class="game-icon purple">🧠</div>
+                <h3>Jogo da Memória</h3>
+                <p>Encontre todos os pares e teste sua memória.</p>
+                <span class="play">JOGAR AGORA →</span>
+            </div>
+
+            <div class="game-card" onclick="openGame('quiz')">
+                <div class="game-icon pink">💡</div>
+                <h3>Quiz de Conhecimentos</h3>
+                <p>Responda perguntas e descubra quantos pontos consegue fazer.</p>
+                <span class="play">JOGAR AGORA →</span>
+            </div>
+
+            <div class="game-card" onclick="openGame('click')">
+                <div class="game-icon blue">⚡</div>
+                <h3>Clique Rápido</h3>
+                <p>Teste sua velocidade e acerte o máximo de cliques.</p>
+                <span class="play">JOGAR AGORA →</span>
+            </div>
+
+            <div class="game-card" onclick="openGame('rps')">
+                <div class="game-icon orange">✊</div>
+                <h3>Pedra, Papel e Tesoura</h3>
+                <p>Enfrente o computador nesse clássico.</p>
+                <span class="play">JOGAR AGORA →</span>
+            </div>
+
+            <div class="game-card" onclick="openGame('number')">
+                <div class="game-icon green">🔢</div>
+                <h3>Número Secreto</h3>
+                <p>Descubra o número misterioso com dicas.</p>
+                <span class="play">JOGAR AGORA →</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="gameArea">
+        <div class="game-content">
+            <h2 id="gameTitle"></h2>
+            <p id="gameDescription"></p>
+            <div id="gameBody"></div>
+            <div id="feedback"></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    Feito com <span>♥</span> para quem ama jogar. | PLAYVERSE © 2026
+</footer>
+
+<script>
+const area = document.getElementById("gameArea");
+const title = document.getElementById("gameTitle");
+const description = document.getElementById("gameDescription");
+const body = document.getElementById("gameBody");
+const feedback = document.getElementById("feedback");
+
+function openGame(game) {
+    area.style.display = "block";
+    feedback.innerHTML = "";
+    body.innerHTML = "";
+
+    area.scrollIntoView({ behavior: "smooth" });
+
+    if (game === "memory") memoryGame();
+    if (game === "quiz") quizGame();
+    if (game === "click") clickGame();
+    if (game === "rps") rpsGame();
+    if (game === "number") numberGame();
+}
+
+// JOGO DA MEMÓRIA
+
+function memoryGame() {
+    title.innerText = "🧠 Jogo da Memória";
+    description.innerText = "Encontre os 6 pares de emojis.";
+
+    const emojis = ["🍓","🍓","🐱","🐱","🌈","🌈","⭐","⭐","🍕","🍕","🎮","🎮"];
+    emojis.sort(() => Math.random() - 0.5);
+
+    let first = null;
+    let lock = false;
+    let pairs = 0;
+
+    body.innerHTML = '<div class="memory-grid" id="memoryGrid"></div>';
+
+    const grid = document.getElementById("memoryGrid");
+
+    emojis.forEach((emoji, index) => {
+        const card = document.createElement("div");
+        card.className = "memory-card";
+        card.innerText = "❔";
+
+        card.onclick = () => {
+            if (lock || card.dataset.open === "yes") return;
+
+            card.innerText = emoji;
+            card.dataset.open = "yes";
+
+            if (!first) {
+                first = card;
+            } else {
+                if (first.innerText === card.innerText) {
+                    pairs++;
+                    first = null;
+
+                    if (pairs === 6) {
+                        feedback.innerText = "🎉 Parabéns! Você encontrou todos os pares!";
+                    }
+                } else {
+                    lock = true;
+
+                    const previous = first;
+                    first = null;
+
+                    setTimeout(() => {
+                        card.innerText = "❔";
+                        previous.innerText = "❔";
+                        card.dataset.open = "no";
+                        previous.dataset.open = "no";
+                        lock = false;
+                    }, 800);
+                }
+            }
+        };
+
+        grid.appendChild(card);
+    });
+
+    body.innerHTML += '<button onclick="memoryGame()">Reiniciar jogo</button>';
+}
+
+// QUIZ
+
+const questions = [
+    {
+        q: "Qual é o maior planeta do Sistema Solar?",
+        a: ["Terra", "Júpiter", "Marte"],
+        correct: 1
+    },
+    {
+        q: "Quantos lados tem um hexágono?",
+        a: ["5", "6", "8"],
+        correct: 1
+    },
+    {
+        q: "Qual animal é conhecido como rei da selva?",
+        a: ["Leão", "Tigre", "Elefante"],
+        correct: 0
+    },
+    {
+        q: "Qual é a capital do Japão?",
+        a: ["Seul", "Pequim", "Tóquio"],
+        correct: 2
+    },
+    {
+        q: "Quanto é 9 x 8?",
+        a: ["64", "72", "81"],
+        correct: 1
+    }
+];
+
+function quizGame() {
+    title.innerText = "💡 Quiz de Conhecimentos";
+    description.innerText = "Responda às perguntas e acumule pontos!";
+
+    let current = 0;
+    let score = 0;
+
+    function showQuestion() {
+        feedback.innerText = "";
+
+        if (current >= questions.length) {
+            body.innerHTML = `
+                <h2>🏆 Resultado final</h2>
+                <p>Você acertou ${score} de ${questions.length} perguntas!</p>
+                <button onclick="quizGame()">Jogar novamente</button>
+            `;
+            return;
+        }
+
+        const q = questions[current];
+
+        body.innerHTML = `
+            <h3>${current + 1}. ${q.q}</h3>
+            <br>
+            ${q.a.map((answer, i) =>
+                `<button onclick="answerQuiz(${i})">${answer}</button>`
+            ).join("")}
+        `;
+    }
+
+    window.answerQuiz = function (answer) {
+        if (answer === questions[current].correct) {
+            score++;
+            feedback.innerText = "✅ Resposta correta!";
+        } else {
+            feedback.innerText = "❌ Não foi dessa vez!";
+        }
+
+        current++;
+
+        setTimeout(showQuestion, 900);
+    };
+
+    showQuestion();
+}
+
+// CLIQUE RÁPIDO
+
+let clickCount = 0;
+let clickTime = 10;
+let clickInterval;
+
+function clickGame() {
+    title.innerText = "⚡ Clique Rápido";
+    description.innerText = "Clique no alvo o máximo de vezes em 10 segundos.";
+
+    clickCount = 0;
+    clickTime = 10;
+
+    body.innerHTML = `
+        <h2 id="timer">10 segundos</h2>
+        <h3 id="clickScore">Cliques: 0</h3>
+        <div id="target"></div>
+        <br>
+        <button onclick="startClickGame()">COMEÇAR</button>
+    `;
+}
+
+function startClickGame() {
+    clearInterval(clickInterval);
+
+    clickCount = 0;
+    clickTime = 10;
+
+    const target = document.getElementById("target");
+    target.style.display = "block";
+
+    document.getElementById("clickScore").innerText = "Cliques: 0";
+    document.getElementById("timer").innerText = "10 segundos";
+
+    target.onclick = () => {
+        if (clickTime > 0) {
+            clickCount++;
+            document.getElementById("clickScore").innerText = "Cliques: " + clickCount;
+        }
+    };
+
+    clickInterval = setInterval(() => {
+        clickTime--;
+        document.getElementById("timer").innerText = clickTime + " segundos";
+
+        if (clickTime <= 0) {
+            clearInterval(clickInterval);
+            target.style.display = "none";
+            feedback.innerText = "🏆 Você conseguiu " + clickCount + " cliques!";
+        }
+    }, 1000);
+}
+
+// PEDRA, PAPEL E TESOURA
+
+function rpsGame() {
+    title.innerText = "✊ Pedra, Papel e Tesoura";
+    description.innerText = "Escolha sua jogada e enfrente o computador.";
+
+    body.innerHTML = `
+        <button onclick="playRPS('Pedra')">✊ Pedra</button>
+        <button onclick="playRPS('Papel')">✋ Papel</button>
+        <button onclick="playRPS('Tesoura')">✌️ Tesoura</button>
+        <h3 id="rpsResult" style="margin-top:20px"></h3>
+    `;
+}
+
+function playRPS(player) {
+    const options = ["Pedra", "Papel", "Tesoura"];
+    const computer = options[Math.floor(Math.random() * 3)];
+
+    let result = "";
+
+    if (player === computer) {
+        result = "Empate! 🤝";
+    } else if (
+        (player === "Pedra" && computer === "Tesoura") ||
+        (player === "Papel" && computer === "Pedra") ||
+        (player === "Tesoura" && computer === "Papel")
+    ) {
+        result = "Você venceu! 🎉";
+    } else {
+        result = "O computador venceu! 🤖";
+    }
+
+    document.getElementById("rpsResult").innerText =
+        "Você: " + player + " | Computador: " + computer + " | " + result;
+}
+
+// NÚMERO SECRETO
+
+let secretNumber;
+let attempts;
+
+function numberGame() {
+    title.innerText = "🔢 Número Secreto";
+    description.innerText = "Descubra o número escolhido entre 1 e 100.";
+
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+    attempts = 0;
+
+    body.innerHTML = `
+        <input type="number" id="guess" min="1" max="100" placeholder="Seu palpite">
+        <br>
+        <button onclick="checkNumber()">TENTAR</button>
+        <button onclick="numberGame()">NOVO JOGO</button>
+    `;
+
+    feedback.innerText = "Boa sorte!";
+}
+
+function checkNumber() {
+    const guess = Number(document.getElementById("guess").value);
+
+    if (!guess || guess < 1 || guess > 100) {
+        feedback.innerText = "Digite um número de 1 a 100!";
+        return;
+    }
+
+    attempts++;
+
+    if (guess === secretNumber) {
+        feedback.innerText = "🎉 Acertou em " + attempts + " tentativas!";
+    } else if (guess < secretNumber) {
+        feedback.innerText = "⬆️ Tente um número MAIOR!";
+    } else {
+        feedback.innerText = "⬇️ Tente um número MENOR!";
+    }
+}
+</script>
+
+</body>
+</html>
